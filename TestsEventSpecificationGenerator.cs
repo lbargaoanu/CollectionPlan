@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IntelliTrace.Config
 {
+    using System;
     using EventSpecification = CollectionPlanTracePointProviderDiagnosticEventSpecification;
 
     [TestClass]
@@ -158,6 +159,16 @@ namespace IntelliTrace.Config
             var result = generator.GetEventSpecification(typeof(Microsoft.VisualStudio.DataQueries.Webforms.Page.OnSaveStateCompleteDataQuery));
 
             AssertEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void AllMethods()
+        {
+            var generator = new EventSpecificationGenerator(typeof(BitConverter));
+
+            var results = generator.GetEventSpecifications();
+
+            Assert.AreEqual(15, results.Count);
         }
 
         private EventSpecification GetBySettingsName(IList<EventSpecification> list, string name)
