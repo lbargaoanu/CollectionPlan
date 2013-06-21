@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:schemas-microsoft-com:visualstudio:tracelog" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="CollectionPlan">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="StartupInfo">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="LogFileName" />
+              <xs:element name="LogFileDirectory" />
+              <xs:element name="MaximumLogFileSize" type="xs:unsignedShort" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CheckpointOptions">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ThreadCheckpoints">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Mode" type="xs:string" />
+                    <xs:element name="StartRate" type="xs:unsignedShort" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="NotifyPointCheckpoints">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Mode" type="xs:string" />
+                    <xs:element name="StartRate" type="xs:unsignedShort" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TraceInstrumentation">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Options" type="xs:string" />
+              <xs:element name="ModuleList">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="Name" type="xs:string" />
+                  </xs:sequence>
+                  <xs:attribute name="isExclusionList" type="xs:boolean" use="required" />
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="ProcessList">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="Name" type="xs:string" />
+                  </xs:sequence>
+                  <xs:attribute name="isExclusionList" type="xs:boolean" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="enabled" type="xs:boolean" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DetourInstrumentation">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ModuleList">
+                <xs:complexType>
+                  <xs:attribute name="isExclusionList" type="xs:boolean" use="required" />
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="ProcessList">
+                <xs:complexType>
+                  <xs:attribute name="isExclusionList" type="xs:boolean" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="enabled" type="xs:boolean" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CoverageInstrumentation">
+          <xs:complexType>
+            <xs:attribute name="enabled" type="xs:boolean" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DiagnosticEventInstrumentation">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ModuleList">
+                <xs:complexType>
+                  <xs:attribute name="isExclusionList" type="xs:boolean" use="required" />
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="ProcessList">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="Name" type="xs:string" />
+                  </xs:sequence>
+                  <xs:attribute name="isExclusionList" type="xs:boolean" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="enabled" type="xs:boolean" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="WebRequestTrackingInstrumentation">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ProcessList">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="Name" type="xs:string" />
+                  </xs:sequence>
+                  <xs:attribute name="isExclusionList" type="xs:boolean" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="enabled" type="xs:boolean" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="WebTrackingInstrumentation">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ProcessList">
+                <xs:complexType>
+                  <xs:attribute name="isExclusionList" type="xs:boolean" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="enabled" type="xs:boolean" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="UnitTestIsolationInstrumentation">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ProcessList">
+                <xs:complexType>
+                  <xs:attribute name="isExclusionList" type="xs:boolean" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="enabled" type="xs:boolean" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TracePointProvider">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Categories">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="Category">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute name="Id" type="xs:string" use="required" />
+                            <xs:attribute name="_locID" type="xs:string" use="required" />
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="ModuleSpecifications">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="ModuleSpecification">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute name="Id" type="xs:string" use="required" />
+                            <xs:attribute name="maxVersion" type="xs:string" use="optional" />
+                            <xs:attribute name="minVersion" type="xs:string" use="optional" />
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="DiagnosticEventSpecifications">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="DiagnosticEventSpecification">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="CategoryId" type="xs:string" />
+                          <xs:element name="SettingsName">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                  <xs:attribute name="_locID" type="xs:string" use="required" />
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="SettingsDescription">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                  <xs:attribute name="_locID" type="xs:string" use="required" />
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="Bindings">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element maxOccurs="unbounded" name="Binding">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="ModuleSpecificationId" type="xs:string" />
+                                      <xs:element name="TypeName" type="xs:string" />
+                                      <xs:element name="MethodName" type="xs:string" />
+                                      <xs:element name="MethodId" type="xs:string" />
+                                      <xs:element minOccurs="0" name="ProgrammableDataQuery">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="ModuleName" type="xs:string" />
+                                            <xs:element name="TypeName" type="xs:string" />
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element minOccurs="0" name="ShortDescription">
+                                        <xs:complexType>
+                                          <xs:simpleContent>
+                                            <xs:extension base="xs:string">
+                                              <xs:attribute name="_locID" type="xs:string" use="required" />
+                                            </xs:extension>
+                                          </xs:simpleContent>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element minOccurs="0" name="LongDescription">
+                                        <xs:complexType>
+                                          <xs:simpleContent>
+                                            <xs:extension base="xs:string">
+                                              <xs:attribute name="_locID" type="xs:string" use="required" />
+                                            </xs:extension>
+                                          </xs:simpleContent>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element minOccurs="0" name="DataQueries">
+                                        <xs:complexType>
+                                          <xs:sequence minOccurs="0">
+                                            <xs:element maxOccurs="unbounded" name="DataQuery">
+                                              <xs:complexType>
+                                                <xs:attribute name="index" type="xs:byte" use="required" />
+                                                <xs:attribute name="maxSize" type="xs:unsignedShort" use="optional" />
+                                                <xs:attribute name="type" type="xs:string" use="required" />
+                                                <xs:attribute name="name" type="xs:string" use="required" />
+                                                <xs:attribute name="_locID" type="xs:string" use="required" />
+                                                <xs:attribute name="_locAttrData" type="xs:string" use="required" />
+                                                <xs:attribute name="query" type="xs:string" use="required" />
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="onReturn" type="xs:boolean" use="optional" />
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="enabled" type="xs:boolean" use="optional" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
